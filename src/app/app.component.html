@@ -1,0 +1,124 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="background-color: #F7F7F8;
+            display: flex;
+            flex-direction: column;">
+  <div class="comments">
+    <div class="properties-comment">
+      <div *ngIf="!loadingComments"
+           class="comment">
+        <div class="text-comment">
+          {{comments[id]['text']}}
+        </div>
+        <div class="author-comment">
+          <span class="author">{{comments[id]['name']}}, </span>
+          <span class="username"> {{comments[id]['instagram_username']}}</span>
+        </div>
+      </div>
+
+      <div *ngIf="loadingComments"
+           class="comment">
+        <div class="gag-comment">
+            <div *ngFor="let block of [0, 1, 2, 3, 4], let id = index"
+                 [class]="'gag-line custom-btn'"></div>
+        </div>
+        <div class="author-comment">
+          <div class="gag-author custom-btn">
+          </div>
+          <div *ngIf="mobile" class="gag-author custom-btn">
+          </div>
+        </div>
+      </div>
+
+      <div style="align-self: center;">
+        <div class="image-hum"></div>
+        <div class="toggle-hum">
+          <button tabindex="-1"
+                  class="button-toggle-hum"
+                  (click)="id = (id !== 0) ? id - 1 : comments.length - 1">
+            <img src="../assets/icons/Path%202.svg"
+                 alt="NaN"
+                 style="transform: rotate(180deg)">
+          </button>
+          <button tabindex="0"
+                  class="button-toggle-hum"
+                  (click)="id = (id >= comments.length - 1) ? 0 : id + 1">
+            <img src="../assets/icons/Path%202.svg"
+                 alt="NaN">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="head-title">
+    What's New?
+  </div>
+
+  <div class="standart-carts">
+    <div class="carts"
+         (click)="goPost('https://blog.combin.com/instagram-faq-all-you-need-to-know-bb2559ac606b')">
+      <div class="cart">
+        <img class="img-properties"
+             [src]="arrImage[0]"
+             alt="Error">
+        <div class="cart-text">
+          Instagram FAQ — All You Need To Know
+        </div>
+      </div>
+    </div>
+
+    <div class="carts middle-standart-cart"
+         (click)="goPost('https://blog.combin.com/dmexco-2019-meet-combin-in-cologne-b845529a1e63')">
+      <div class="cart">
+        <img class="img-properties"
+             [src]="arrImage[1]"
+             alt="Error">
+        <div class="cart-text">
+          DMEXCO 2019 — Meet Combin in Cologne
+        </div>
+      </div>
+    </div>
+
+    <div class="carts"
+         (click)="goPost('https://blog.combin.com/limits-display-new-user-preview-new-filters-and-many-more-features-all-about-combin-2-1-d78713383da7')">
+      <div class="cart">
+        <img class="img-properties"
+             [src]="arrImage[2]"
+             alt="Error">
+        <div class="cart-text">
+          Limits Display, New User Preview, New Filters, and Many More Features — All about Combin 2.1
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div (click)="openMore(); openReadMore = !openReadMore;"
+       class="read-more">
+    Read More
+    <span class="icon-read-more"
+          [style.transform]="openReadMore ? 'rotate(180deg)' : 'rotate(0deg)'">
+      <img src="../assets/icons/keyboard_arrow_down-24px.svg"
+         alt="NaN">
+    </span>
+  </div>
+
+
+    <div *ngIf="openReadMore" class="link-posts-g">
+      <div *ngFor="let post of moreLinks"
+           class="carts mobile"
+           (click)="goPost(post['url'])">
+        <div class="cart">
+          <img class="img-properties"
+               [src]="post['img']"
+               alt="Error">
+          <div class="cart-text">
+            {{post['title']}}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<router-outlet>
+</router-outlet>
